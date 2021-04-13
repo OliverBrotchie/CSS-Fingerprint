@@ -1,0 +1,152 @@
+$baseUrl: '/some/url/' !default
+
+$width: '#{$baseUrl}width=' !default
+$height: '#{$baseUrl}height=' !default
+$dpi: '#{$baseUrl}dpi=' !default
+$pointer: '#{$baseUrl}pointer=' !default
+$touchscreen: '#{$baseUrl}touchscreen=' !default
+
+$theme: '#{$baseUrl}theme=' !default
+$scripting: '#{$baseUrl}scripting=' !default
+
+$family: '#{$baseUrl}family=' !default
+$os: '#{$baseUrl}os=' !default
+
+/* Device Characteristics */
+    
+// Dimentions
+@for $i from 300px through 3840px
+    @media (width: $i)
+        #width
+            &::after
+                content: 'Width: #{$i}'
+                background-image: url('#{$width}#{$i}')
+
+@for $i from 250px through 2161px
+    @media (height: $i)
+        #height
+            &::after
+                content: 'Height: #{$i}'
+                background-image: url('#{$height}#{$i}')
+
+
+// DPI
+@for $i from 1dpi through 1000dpi
+    @media (resolution: $i)
+        #dpi
+            &::after
+                content: 'DPI: #{$i}'
+                background-image: url('#{$dpi}#{$i}')
+
+
+// Pointer
+#pointer
+    &::after
+        content: 'Pointer: None'
+        background-image: url('#{$pointer}none')
+
+@media (pointer: coarse)
+    #pointer
+        &::after
+            content: 'Pointer: Coarse'
+            background-image: url('#{$pointer}coarse')
+
+
+@media (pointer: fine)
+    #pointer
+        &::after
+            content: 'Pointer: Fine'
+            background-image: url('#{$pointer}fine')
+
+
+// Touchscreen
+#touch
+    &::after
+        content: 'Touchscreen: False'
+        background-image: url('#{$touchscreen}false')
+
+@media (hover: none)
+    #touch
+        &::after
+            content: 'Touchscreen: True'
+            background-image: url('#{$touchscreen}true')
+
+
+
+
+
+
+/* User Preferences */
+
+// Color scheme preference
+#theme
+    &::after
+        content: 'Dark/light theme preference: None'
+        background-image: url('#{$theme}none')
+
+@media (prefers-color-scheme: dark) 
+    #theme
+        &::after
+            content: 'Dark/light theme preference: Dark'
+            background-image: url('#{$theme}dark')
+
+@media (prefers-color-scheme: light) 
+    #theme
+        &::after
+            content: 'Dark/light theme preference: light'
+            background-image: url('#{$theme}light')
+
+
+// Scripting Preferences
+#scripting
+    &::after
+        content: 'Scripting: Enabled'
+        background-image: url('#{$scripting}true')
+
+@media (scripting: initial-only)
+    #scripting
+        &::after
+            content: 'Scripting: Only Initial'
+            background-image: url('#{$scripting}initial-only')
+
+@media (scripting: none)
+    #scripting
+        &::after
+            content: 'Scripting: Disabled'
+            background-image: url('#{$scripting}false')
+
+
+
+/* Browser and OS*/
+
+// Browser Family
+#family
+    &::after
+        content: 'Browser Family: Internet Explorer'
+        background-image: url('#{$family}ie')
+
+@supports (-webkit-font-smoothing:auto)
+    #family
+        &::after
+            content: 'Browser Family: Chrome'
+            background-image: url('#{$family}chrome')
+
+@supports not (-webkit-appearance: auto)
+    #family
+        &::after
+            content: 'Browser Family: Safari'
+            background-image: url('#{$family}safari')
+
+@supports (-moz-device-pixel-ratio: 1)
+    #family
+        &::after
+            content: 'Browser Family: Firefox'
+            background-image: url('#{$family}firefox')
+
+
+// OS
+@supports (-webkit-overflow-scrolling:auto)
+    #os
+        &::after
+            content: 'OS: IOS'
+            background-image: url('#{$os}ios')
