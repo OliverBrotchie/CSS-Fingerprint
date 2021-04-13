@@ -81,19 +81,19 @@ $os: '#{$baseUrl}os=' !default
 // Color scheme preference
 #theme
     &::after
-        content: 'Dark/light theme preference: None'
+        content: 'Theme preference: None'
         background-image: url('#{$theme}none')
 
 @media (prefers-color-scheme: dark) 
     #theme
         &::after
-            content: 'Dark/light theme preference: Dark'
+            content: 'Theme preference: Dark'
             background-image: url('#{$theme}dark')
 
 @media (prefers-color-scheme: light) 
     #theme
         &::after
-            content: 'Dark/light theme preference: light'
+            content: 'Theme preference: light'
             background-image: url('#{$theme}light')
 
 
