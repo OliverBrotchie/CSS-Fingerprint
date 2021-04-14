@@ -128,8 +128,15 @@ $os: '#{$baseUrl}os=' !default
 @supports (-webkit-font-smoothing:auto)
     #family
         &::after
-            content: 'Browser Family: Chrome'
-            background-image: url('#{$family}chrome')
+            content: 'Browser Family: Chromium'
+            background-image: url('#{$family}chromium')
+
+@supports (speech:none)
+    #family
+        &::after
+            content: 'Browser Family: Opera'
+            background-image: url('#{$family}opera')
+
 
 @supports not (-webkit-appearance: auto)
     #family
