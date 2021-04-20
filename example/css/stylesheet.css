@@ -23,19 +23,32 @@ nav {
   justify-content: space-evenly;
   margin: 0 0 40px 0; }
   .flex-box .segment {
-    height: 300px;
+    min-height: 300px;
     min-width: 300px;
     max-width: 500px;
     margin-top: 30px;
     padding: 0 20px;
     border: 1px dashed; }
 
+.center {
+  display: grid;
+  place-items: center; }
+
+.clamp {
+  width: clamp(45ch, 50%, 75ch);
+  text-align: left; }
+
 html, body {
   margin: 0;
-  background-color: #fff; }
+  background-color: #fff;
+  font-size: 16px; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: #5B8499; }
+
+b {
+  color: #5B8499; }
 
 main {
   margin: 50px 50px 100px 50px;

@@ -1,3 +1,5 @@
+@import 'fonts.sass'
+
 $baseUrl: '/some/url/' !default
 
 $width: '#{$baseUrl}width=' !default
@@ -11,6 +13,18 @@ $scripting: '#{$baseUrl}scripting=' !default
 
 $family: '#{$baseUrl}family=' !default
 $os: '#{$baseUrl}os=' !default
+
+$font: '#{$baseUrl}fontName=' !default
+
+
+@mixin hide
+    font-size: 0px !important
+    padding: 0 !important
+    margin: 0 !important
+    height: 0 !important
+    width: 0 !important
+    overflow: hidden !important
+    position: fixed !important
 
 /* Device Characteristics */
     
@@ -157,3 +171,22 @@ $os: '#{$baseUrl}os=' !default
         &::after
             content: 'OS: IOS'
             background-image: url('#{$os}ios')
+
+
+
+/* Fonts */
+#fonts
+    @include hide
+
+@for $i from 1 through length($font-array)
+    $font-name: nth(nth($font-array, $i),1)
+    $font-url: nth(nth($font-array, $i),2)
+    
+    @font-face
+        font-family: '#{$font-url}'
+        src: local($font-name), url('#{$font}#{$font-url}')
+    #fonts
+        &>:nth-child(#{$i - 1}n)
+            &::after
+                content: '.'
+                font-family: '#{$font-url}' 
