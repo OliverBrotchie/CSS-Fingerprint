@@ -5,7 +5,7 @@
 		<title>CSS Fingerprinting</title>
 
 		<link type="text/css" rel="stylesheet" href="example/css/stylesheet.css"/>
-		<link type="text/css" rel="stylesheet" href="fingerprint.css"/>
+		<link type="text/css" rel="stylesheet" href="example/css/example.css"/>
 		<link type="text/css" rel="stylesheet" href="https://rawcdn.githack.com/OliverBrotchie/fonts/f1b64bd96d9be227f48e16f1c9ff3eecf669a10d/fonts.css"/>
 		
 		<link rel="apple-touch-icon" sizes="180x180" href="example/favicon/apple-touch-icon.png">
@@ -33,7 +33,7 @@
 		</nav>
 
 		<main>
-			<h2>Captured Infomation:</h2>
+			<h2>Captured Infomation: ADD CSS HTML INSERTS</h2>
 			<div class="flex-box">
 				<div class="segment">
 					<h2>Device Characteristics</h2>
@@ -43,22 +43,23 @@
 					<p id="dpi"></p>
 					<p id="pointer"></p>
 					<p id="touch"></p>
-					<p>Add Color Depth</p>
 				</div>
 				<div class="segment">
 					<h2>User Preferences</h2>
 					<p id="theme"></p>
 					<p id="scripting"></p>
-					<p>Disability stuff</p>
 				</div>
 				<div class="segment">
 					<h2>Browser and OS</h2>
 					<p id="family"></p>
 					<p id="os"></p>
-					<p>Version: Not Implemented</p>
+					<p>Version: (WIP)</p>
 				</div>
 				<div class="segment">
 					<h2>Fonts</h2>
+					<p class="clamp">Captured fonts cannot be displayed to a user without a backend. (WIP)</p>
+					<p class="clamp">Every font that isnt installedon the device will send out a request and by finding the difference between the requests and the full list of fonts, we can determine what is.</p>
+					<p class="clamp">Fonts tested can be found <a href="https://raw.githubusercontent.com/fontsource/fontsource/main/FONTLIST.json">here</a>.</p> 
 					<div id="fonts">
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
@@ -71,19 +72,16 @@
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-					
 					</div>
-					<p>Cannot be displayed to user without a backend, however they can be captured - giving further infomation of OS and browser type.</p>
-					<p>Fonts tested can be found <a href="https://raw.githubusercontent.com/fontsource/fontsource/main/FONTLIST.json">here</a>.</p> 
 				</div>
 			</div>
 			<div class="center">
 				<h2>How this works</h2>
 				<p class="clamp">
-					This works by detecting spesific features of the browser using CSS and exfiltrating this infomation by exploiting url() tags.
+					This works by detecting spesific features of the browser using CSS; exfiltrating this infomation by exploiting url() tags.
 					As you can see if you open dev tools, the browser is making requests to urls that correspond to spesific device infomation. <br><br>
 					
-					This is a simple demo and is not hooked up to an api and hense these requests are returning errors.<br><br><br>
+					This is a simple demo and is not hooked up to an api and hense these requests are returning errors.(WIP)<br><br><br>
 					
 					<b>Technique inspired by:</b><br> Takei, N., Saito, T., Takasu, K. and Yamada, T., 2015, November. Web browser fingerprinting using only cascading style sheets. In 2015 10th International Conference on Broadband and Wireless Computing, Communication and Applications (BWCCA) (pp. 57-63). IEEE. <br><br><br>
 					<h3><a href="https://github.com/OliverBrotchie/css-fingerprinting">See README.md for more info!</a></h3>

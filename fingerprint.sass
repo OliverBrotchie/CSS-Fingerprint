@@ -1,6 +1,10 @@
 @import 'fonts.sass'
 
 $baseUrl: '/some/url/' !default
+$print: false !default
+
+
+$font: '#{$baseUrl}fontName=' !default
 
 $width: '#{$baseUrl}width=' !default
 $height: '#{$baseUrl}height=' !default
@@ -8,13 +12,24 @@ $dpi: '#{$baseUrl}dpi=' !default
 $pointer: '#{$baseUrl}pointer=' !default
 $touchscreen: '#{$baseUrl}touchscreen=' !default
 
+$color: '#{$baseUrl}color=' !default
+$color-gamut: '#{$baseUrl}color-gamut=' !default
+$color-index: '#{$baseUrl}color-index=' !default
+$forced-colors: '#{$baseUrl}forced-colors=' !default
+$inverted-colors: '#{$baseUrl}inverted-colors=' !default
+
+$grid: '#{$baseUrl}grid=' !default
+$scan: '#{$baseUrl}scan=' !default
+$display-mode: '#{$baseUrl}display-mode=' !default
+$overflow-block: '#{$baseUrl}overflow-block=' !default
+$overflow-inline: '#{$baseUrl}overflow-inline=' !default
+
 $theme: '#{$baseUrl}theme=' !default
 $scripting: '#{$baseUrl}scripting=' !default
+$contrast: '#{$baseUrl}contrast=' !default
 
 $family: '#{$baseUrl}family=' !default
 $os: '#{$baseUrl}os=' !default
-
-$font: '#{$baseUrl}fontName=' !default
 
 
 @mixin hide
@@ -25,168 +40,420 @@ $font: '#{$baseUrl}fontName=' !default
     width: 0 !important
     overflow: hidden !important
     position: fixed !important
+    visibility: none !important
 
-/* Device Characteristics */
+
+
+
+/* Device Attributes */
     
 // Dimentions
-@for $i from 300px through 3840px
-    @media (width: $i)
-        #width
+@mixin width
+    @for $i from 300px through 3840px
+        @media (width: $i)
             &::after
-                content: 'Width: #{$i}'
                 background-image: url('#{$width}#{$i}')
+                @if $print
+                    content: 'Width: #{$i}'
+                @else
+                    @include hide
 
-@for $i from 250px through 2161px
-    @media (height: $i)
-        #height
+@mixin height
+    @for $i from 250px through 2161px
+        @media (height: $i)
             &::after
-                content: 'Height: #{$i}'
                 background-image: url('#{$height}#{$i}')
+                @if $print
+                    content: 'Height: #{$i}'
+                @else
+                    @include hide
 
 
 // DPI
-@for $i from 1dpi through 1000dpi
-    @media (resolution: $i)
-        #dpi
+@mixin dpi
+    @for $i from 1dpi through 1000dpi
+        @media (resolution: $i)
             &::after
-                content: 'DPI: #{$i}'
                 background-image: url('#{$dpi}#{$i}')
+                @if $print
+                    content: 'DPI: #{$i}'
+                @else
+                    @include hide
 
 
 // Pointer
-#pointer
+@mixin pointer
     &::after
-        content: 'Pointer: None'
         background-image: url('#{$pointer}none')
+        @if $print
+            content: 'Pointer: None'
+        @else
+            @include hide
 
-@media (pointer: coarse)
-    #pointer
+    @media (pointer: coarse)
         &::after
-            content: 'Pointer: Coarse'
             background-image: url('#{$pointer}coarse')
+            @if $print
+                content: 'Pointer: Coarse'
+            @else
+                @include hide    
 
-
-@media (pointer: fine)
-    #pointer
+    @media (pointer: fine)
         &::after
-            content: 'Pointer: Fine'
             background-image: url('#{$pointer}fine')
+            @if $print
+                content: 'Pointer: Fine'
+            @else
+                @include hide   
 
 
 // Touchscreen
-#touch
+@mixin touchscreen
     &::after
-        content: 'Touchscreen: False'
         background-image: url('#{$touchscreen}false')
+        @if $print
+            content: 'Touchscreen: False'
+        @else
+            @include hide   
 
-@media (hover: none)
-    #touch
+    @media (hover: none)
         &::after
-            content: 'Touchscreen: True'
             background-image: url('#{$touchscreen}true')
+            @if $print
+                content: 'Touchscreen: True'
+            @else
+                @include hide   
 
 
 
+/* Color */
+
+// Color
+@mixin color
+    @for $i from 1 through 48
+        @media (color: $i)
+            &::after
+                background-image: url('#{$color}#{$i}')
+                @if $print
+                    content: 'Bits Per Color: #{$i}'
+                @else
+                    @include hide
+
+
+// Color Gamut
+@mixin color-gamut
+    $gamut: [srgb,p3,rec2020]
+    @each $value in $gamut
+        @media (color-gamut: $value)
+            &::after
+                background-image: url('#{$color-gamut}#{$value}')
+                @if $print
+                    content: 'Color Gamut: #{$value}'
+                @else
+                    @include hide
+
+// Color Index
+@mixin color-index
+    $hex: [1,256,4096,32768,65536,262144,16777216,1073741824,68719476736,281474976710656]
+    @each $value in $hex
+        @media (min-color-index: $value)
+            &::after
+                background-image: url('#{$color-index}#{$value}')
+                @if $print
+                    content: 'Color Index: >=#{$value}'
+                @else
+                    @include hide
+
+// Forced Colors
+@mixin forced-colors
+    &::after
+        background-image: url('#{$forced-colors}none')
+        @if $print
+            content: 'Forced Colors: None'
+        @else
+            @include hide
+    
+    @media (forced-colors: active)
+        &::after
+            background-image: url('#{$forced-colors}active')
+            @if $print
+                content: 'Forced Colors: Active'
+            @else
+                @include hide
+
+// Inverted Colors
+@mixin inverted-colors
+    &::after
+        background-image: url('#{$inverted-colors}unknown')
+        @if $print
+            content: 'Forced Colors: Unknown'
+        @else
+            @include hide
+    
+    @media (inverted-colors: none)
+        &::after
+            background-image: url('#{$inverted-colors}none')
+            @if $print
+                content: 'Forced Colors: None'
+            @else
+                @include hide
+    
+    @media (inverted-colors: inverted)
+        &::after
+            background-image: url('#{$inverted-colors}inverted')
+            @if $print
+                content: 'Forced Colors: Inverted'
+            @else
+                @include hide
+
+
+
+
+/* Display Attributes */
+
+// Grid
+@mixin grid
+    &::after
+        background-image: url('#{$grid}unknown')
+        @if $print
+            content: 'Grid-based Screen: Unknown'
+        @else
+            @include hide
+    
+    @media (grid: 0)
+        &::after
+            background-image: url('#{$grid}false')
+            @if $print
+                content: 'Grid-based Screen: False'
+            @else
+                @include hide
+    
+    @media (grid: 1)
+        &::after
+            background-image: url('#{$grid}true')
+            @if $print
+                content: 'Grid-based Screen: True'
+            @else
+                @include hide
+
+// Scan
+@mixin scan
+    &::after
+        background-image: url('#{$scan}none')
+        @if $print
+            content: 'Scanning Process: None'
+        @else
+            @include hide
+    @media (scan: interlace)
+        &::after
+            background-image: url('#{$scan}interlaced')
+            @if $print
+                content: 'Scanning Process: Interlaced'
+            @else
+                @include hide
+    @media (scan: interlace)
+        &::after
+            background-image: url('#{$scan}interlaced')
+            @if $print
+                content: 'Scanning Process: Interlaced'
+            @else
+                @include hide
+
+// Display Mode
+@mixin display-mode
+    $mode: [fullscreen,standalone,minimal-ui,browser]
+    @each $value in $mode
+        @media (display-mode: $value)
+            &::after
+                background-image: url('#{$display-mode}#{$value}')
+                @if $print
+                    content: 'Display Mode: #{$value}'
+                @else
+                    @include hide
+
+// Overflow Block
+@mixin overflow-block
+    $mode: [none,scroll,optional-paged,paged]
+    &::after
+        background-image: url('#{$overflow-block}unknown')
+        @if $print
+            content: 'Overflow Block: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $mode
+        @media (overflow-block: $value)
+            &::after
+                background-image: url('#{$overflow-block}#{$value}')
+                @if $print
+                    content: 'Overflow Block: #{$value}'
+                @else
+                    @include hide
+
+// Overflow Inline
+@mixin overflow-inline
+    $mode: [none,scroll]
+    &::after
+        background-image: url('#{$overflow-inline}unknown')
+        @if $print
+            content: 'Overflow Inline: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $mode
+        @media (overflow-block: $value)
+            &::after
+                background-image: url('#{$overflow-inline}#{$value}')
+                @if $print
+                    content: 'Overflow Inline: #{$value}'
+                @else
+                    @include hide
 
 
 
 /* User Preferences */
 
 // Color scheme preference
-#theme
+@mixin theme
     &::after
-        content: 'Theme preference: None'
         background-image: url('#{$theme}none')
+        @if $print
+            content: 'Theme preference: None'
+        @else
+            @include hide   
 
-@media (prefers-color-scheme: dark) 
-    #theme
+    @media (prefers-color-scheme: dark) 
         &::after
-            content: 'Theme preference: Dark'
             background-image: url('#{$theme}dark')
-
-@media (prefers-color-scheme: light) 
-    #theme
+            @if $print
+                content: 'Theme preference: Dark'
+            @else
+                @include hide   
+            
+    @media (prefers-color-scheme: light) 
         &::after
-            content: 'Theme preference: light'
             background-image: url('#{$theme}light')
+            @if $print
+                content: 'Theme preference: light'
+            @else
+                @include hide   
 
 
 // Scripting Preferences
-#scripting
+@mixin scripting
     &::after
-        content: 'Scripting: Enabled'
         background-image: url('#{$scripting}true')
+        @if $print
+            content: 'Scripting: Enabled'
+        @else
+            @include hide   
 
-@media (scripting: initial-only)
-    #scripting
+    @media (scripting: initial-only)
         &::after
-            content: 'Scripting: Only Initial'
             background-image: url('#{$scripting}initial-only')
+            @if $print
+                content: 'Scripting: Only Initial'
+            @else
+                @include hide   
 
-@media (scripting: none)
-    #scripting
+    @media (scripting: none)
         &::after
-            content: 'Scripting: Disabled'
             background-image: url('#{$scripting}false')
+            @if $print
+                content: 'Scripting: Disabled'
+            @else
+                @include hide   
+
+// contrast
+@mixin contrast
+    $peference: [no-preference,more,less]
+    &::after
+        background-image: url('#{$contrast}unknown')
+        @if $print
+            content: 'Contrast Preference: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $peference
+        @media (overflow-block: $value)
+            &::after
+                background-image: url('#{$contrast}#{$value}')
+                @if $print
+                    content: 'Contrast Preference: #{$value}'
+                @else
+                    @include hide
 
 
 
 /* Browser and OS*/
 
 // Browser Family
-#family
+@mixin family
     &::after
-        content: 'Browser Family: Internet Explorer'
         background-image: url('#{$family}ie')
+        @if $print
+            content: 'Browser Family: Internet Explorer'
+        @else
+            @include hide   
 
-@supports (-webkit-font-smoothing:auto)
-    #family
+    @supports (-webkit-font-smoothing:auto)
         &::after
-            content: 'Browser Family: Chromium'
             background-image: url('#{$family}chromium')
+            @if $print  
+                content: 'Browser Family: Chromium'
+            @else
+                @include hide   
 
-@supports (speech:none)
-    #family
+    @supports (speech:none)
         &::after
-            content: 'Browser Family: Opera'
             background-image: url('#{$family}opera')
+            @if $print
+                content: 'Browser Family: Opera'
+            @else
+                @include hide   
 
-
-@supports not (-webkit-appearance: auto)
-    #family
+    @supports not (-webkit-appearance: auto)
         &::after
-            content: 'Browser Family: Safari'
             background-image: url('#{$family}safari')
+            @if $print
+                content: 'Browser Family: Safari'
+            @else
+                @include hide   
 
-@supports (-moz-device-pixel-ratio: 1)
-    #family
+    @supports (-moz-device-pixel-ratio: 1)
         &::after
-            content: 'Browser Family: Firefox'
             background-image: url('#{$family}firefox')
+            @if $print
+                content: 'Browser Family: Firefox'
+            @else
+                @include hide   
+
 
 
 // OS
-@supports (-webkit-overflow-scrolling:auto)
-    #os
+@mixin os
+    @supports (-webkit-overflow-scrolling:auto)
         &::after
-            content: 'OS: IOS'
             background-image: url('#{$os}ios')
+            @if $print
+                content: 'OS: IOS'
+            @else
+                @include hide   
 
 
 
 /* Fonts */
-#fonts
-    @include hide
 
-@for $i from 1 through length($font-array)
-    $font-name: nth(nth($font-array, $i),1)
-    $font-url: nth(nth($font-array, $i),2)
-    
-    @font-face
-        font-family: '#{$font-url}'
-        src: local($font-name), url('#{$font}#{$font-url}')
-    #fonts
-        &>:nth-child(#{$i - 1}n)
+@mixin fonts
+    @include hide
+    @for $i from 1 through length($font-array)
+        >:nth-child(#{$i - 1}n)
             &::after
                 content: '.'
-                font-family: '#{$font-url}' 
+                font-family: '#{nth(nth($font-array, $i),2)}' 
+
+@for $i from 1 through length($font-array)
+    @font-face
+        font-family: '#{nth(nth($font-array, $i),2)}'
+        src: local(nth(nth($font-array, $i),1)), url('#{$font}#{nth(nth($font-array, $i),2)}')
+
