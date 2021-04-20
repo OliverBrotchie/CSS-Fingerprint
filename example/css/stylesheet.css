@@ -34,7 +34,7 @@ nav {
   display: grid;
   place-items: center; }
 
-.clamp {
+.clamp, main p {
   width: clamp(45ch, 50%, 75ch);
   text-align: left; }
 
@@ -52,7 +52,9 @@ b {
   color: #5B8499; }
 
 main {
-  margin: 50px 50px 100px 50px;
+  margin: 50px 50px 100px 50px; }
+
+h1, h2, h3 {
   text-align: center; }
 
 /*# sourceMappingURL=stylesheet.css.map */

@@ -1,5 +1,6 @@
 @import 'fonts.sass'
 
+// Overwritable Variables
 $baseUrl: '/some/url/' !default
 $print: false !default
 
@@ -23,10 +24,13 @@ $scan: '#{$baseUrl}scan=' !default
 $display-mode: '#{$baseUrl}display-mode=' !default
 $overflow-block: '#{$baseUrl}overflow-block=' !default
 $overflow-inline: '#{$baseUrl}overflow-inline=' !default
+$update: '#{$baseUrl}update=' !default
 
 $theme: '#{$baseUrl}theme=' !default
 $scripting: '#{$baseUrl}scripting=' !default
 $contrast: '#{$baseUrl}contrast=' !default
+$motion: '#{$baseUrl}motion=' !default
+$transparency: '#{$baseUrl}transparency=' !default
 
 $family: '#{$baseUrl}family=' !default
 $os: '#{$baseUrl}os=' !default
@@ -90,7 +94,7 @@ $os: '#{$baseUrl}os=' !default
         @else
             @include hide
 
-    @media (pointer: coarse)
+    @media (any-pointer: coarse)
         &::after
             background-image: url('#{$pointer}coarse')
             @if $print
@@ -98,7 +102,7 @@ $os: '#{$baseUrl}os=' !default
             @else
                 @include hide    
 
-    @media (pointer: fine)
+    @media (any-pointer: fine)
         &::after
             background-image: url('#{$pointer}fine')
             @if $print
@@ -116,7 +120,7 @@ $os: '#{$baseUrl}os=' !default
         @else
             @include hide   
 
-    @media (hover: none)
+    @media (any-hover: none)
         &::after
             background-image: url('#{$touchscreen}true')
             @if $print
@@ -160,7 +164,7 @@ $os: '#{$baseUrl}os=' !default
             &::after
                 background-image: url('#{$color-index}#{$value}')
                 @if $print
-                    content: 'Color Index: >=#{$value}'
+                    content: 'Color Index: #{$value}'
                 @else
                     @include hide
 
@@ -186,7 +190,7 @@ $os: '#{$baseUrl}os=' !default
     &::after
         background-image: url('#{$inverted-colors}unknown')
         @if $print
-            content: 'Forced Colors: Unknown'
+            content: 'Inverted Colors: Unknown'
         @else
             @include hide
     
@@ -194,7 +198,7 @@ $os: '#{$baseUrl}os=' !default
         &::after
             background-image: url('#{$inverted-colors}none')
             @if $print
-                content: 'Forced Colors: None'
+                content: 'Inverted Colors: None'
             @else
                 @include hide
     
@@ -301,11 +305,30 @@ $os: '#{$baseUrl}os=' !default
             @include hide
     
     @each $value in $mode
-        @media (overflow-block: $value)
+        @media (overflow-inline: $value)
             &::after
                 background-image: url('#{$overflow-inline}#{$value}')
                 @if $print
                     content: 'Overflow Inline: #{$value}'
+                @else
+                    @include hide
+
+// Update
+@mixin update
+    $mode: [none,slow,fast]
+    &::after
+        background-image: url('#{$update}unknown')
+        @if $print
+            content: 'Update Speed: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $mode
+        @media (update: $value)
+            &::after
+                background-image: url('#{$update}#{$value}')
+                @if $print
+                    content: 'Update Speed: #{$value}'
                 @else
                     @include hide
 
@@ -364,7 +387,7 @@ $os: '#{$baseUrl}os=' !default
             @else
                 @include hide   
 
-// contrast
+// Contrast
 @mixin contrast
     $peference: [no-preference,more,less]
     &::after
@@ -375,13 +398,53 @@ $os: '#{$baseUrl}os=' !default
             @include hide
     
     @each $value in $peference
-        @media (overflow-block: $value)
+        @media (prefers-contrast: $value)
             &::after
                 background-image: url('#{$contrast}#{$value}')
                 @if $print
                     content: 'Contrast Preference: #{$value}'
                 @else
                     @include hide
+
+
+// Reduced Motion
+@mixin motion
+    $peference: [no-preference,reduce]
+    &::after
+        background-image: url('#{$motion}unknown')
+        @if $print
+            content: 'Reduced Motion Preference: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $peference
+        @media (prefers-reduced-motion: $value)
+            &::after
+                background-image: url('#{$motion}#{$value}')
+                @if $print
+                    content: 'Reduced Motion Preference: #{$value}'
+                @else
+                    @include hide
+
+// Reduced Transparency
+@mixin transparency
+    $peference: [no-preference,reduce]
+    &::after
+        background-image: url('#{$transparency}unknown')
+        @if $print
+            content: 'Reduced Transparency Preference: Unknown'
+        @else
+            @include hide
+    
+    @each $value in $peference
+        @media (prefers-reduced-transparency: $value)
+            &::after
+                background-image: url('#{$transparency}#{$value}')
+                @if $print
+                    content: 'Reduced Transparency Preference: #{$value}'
+                @else
+                    @include hide
+
 
 
 
@@ -427,8 +490,6 @@ $os: '#{$baseUrl}os=' !default
                 content: 'Browser Family: Firefox'
             @else
                 @include hide   
-
-
 
 // OS
 @mixin os
