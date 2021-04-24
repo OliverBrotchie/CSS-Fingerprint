@@ -35,7 +35,7 @@ nav {
   place-items: center; }
 
 .clamp, main p {
-  width: clamp(45ch, 50%, 75ch);
+  max-width: clamp(45ch, 50%, 75ch);
   text-align: left; }
 
 html, body {
