@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
 	<head>
 		<title>CSS Fingerprinting</title>
 
@@ -25,7 +24,6 @@
 		<meta http-equiv="Expires" content="0"/>
 		
 	</head>
-
 	<body class="sans">
 		<!-- top navigation bar -->
 		<nav>
@@ -78,7 +76,7 @@
 				<div class="segment">
 					<h2>Fonts</h2>
 					<p>Captured fonts cannot be displayed to a user without a backend. (WIP)</p>
-					<p>Every font that isnt installed on the device will send out a request and by finding the difference between the requests and the full list of fonts, we can determine what is.</p>
+					<p>Every font not installed on device will send a request and by comparing differences between the requests and the full list of fonts, we can draw conclusions about what fonts are installed.</p>
 					<p>Fonts tested can be found <a href="https://raw.githubusercontent.com/fontsource/fontsource/main/FONTLIST.json">here</a>.</p> 
 					<div id="fonts">
 						<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
@@ -98,16 +96,15 @@
 			<div class="center">
 				<h2>How this works</h2>
 				<p class="clamp">
-					This works by detecting spesific features of the browser using CSS; exfiltrating this infomation by exploiting url() tags.
-					As you can see if you open dev tools, the browser is making requests to urls that correspond to spesific device infomation. <br><br>
+					This page detects specific features about a browser using CSS; exfiltrating this information by exploiting URL() tags.
+					Open dev tools. You will note the browser is making requests to URLs that correspond to infomation specific to your device. <br><br>
 					
-					This is a simple demo and is not hooked up to an api and hense these requests are returning errors.(WIP)<br><br><br>
+					Since this is a simple demo, it is not hooked up to an API and hence these requests are returning errors.(WIP)<br><br><br>
 					
 					<b>Technique inspired by:</b><br> Takei, N., Saito, T., Takasu, K. and Yamada, T., 2015, November. Web browser fingerprinting using only cascading style sheets. In 2015 10th International Conference on Broadband and Wireless Computing, Communication and Applications (BWCCA) (pp. 57-63). IEEE. <br><br><br>
 					<h3><a href="https://github.com/OliverBrotchie/css-fingerprinting">See README.md for more info!</a></h3>
 				</p>
 			</div>
 		</main>
-
 	</body>
 </html>
