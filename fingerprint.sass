@@ -67,7 +67,7 @@ $os: '#{$baseUrl}os=' !default
 
 @mixin height
     @for $i from 250px through 2161px
-        @media (height: $i)
+        @media (max-height: $i)
             &::after
                 background-image: url('#{$height}#{$i}')
                 @if $print
