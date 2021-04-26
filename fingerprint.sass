@@ -57,7 +57,7 @@ $os: '#{$baseUrl}os=' !default
 // Dimentions
 @mixin width
     @for $i from 300px through 3840px
-        @media (width: $i)
+        @media (min-width: $i) and (max-width: $i + 1px)
             &::after
                 background-image: url('#{$width}#{$i}')
                 @if $print
@@ -67,7 +67,7 @@ $os: '#{$baseUrl}os=' !default
 
 @mixin height
     @for $i from 250px through 2161px
-        @media screen and (height: $i)
+        @media (min-height: $i) and (max-height: $i + 1px)
             &::after
                 background-image: url('#{$height}#{$i}')
                 @if $print
