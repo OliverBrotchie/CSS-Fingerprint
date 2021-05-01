@@ -522,6 +522,6 @@ $font-array: [[abeezee,'abeezee'], [abel,'abel'], [abhaya libre,'abhaya-libre'],
     @font-face
         font-family: '#{nth(nth($font-array, $i),2)}'
         font-display: block
-        src: url('#{$font}#{nth(nth($font-array, $i),2)}')
+        src: local(nth(nth($font-array, $i),1)), url('#{$font}#{nth(nth($font-array, $i),2)}')
         
 
