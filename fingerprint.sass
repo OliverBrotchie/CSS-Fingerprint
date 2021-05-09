@@ -4,39 +4,39 @@
 /* Repository: https://github.com/OliverBrotchie/css-fingerprinting */
     
 // Overwritable Variables
-$baseUrl: '/some/url/' !default
+$base-url: '/some/url/?' !default
 $print: false !default
 
 
-$font: '#{$baseUrl}fontName=' !default
+$font: '#{$base-url}fontName=' !default
 
-$width: '#{$baseUrl}width=' !default
-$height: '#{$baseUrl}height=' !default
-$dpi: '#{$baseUrl}dpi=' !default
-$pointer: '#{$baseUrl}pointer=' !default
-$touchscreen: '#{$baseUrl}touchscreen=' !default
+$width: '#{$base-url}width=' !default
+$height: '#{$base-url}height=' !default
+$dpi: '#{$base-url}dpi=' !default
+$pointer: '#{$base-url}pointer=' !default
+$touchscreen: '#{$base-url}touchscreen=' !default
 
-$color: '#{$baseUrl}color=' !default
-$color-gamut: '#{$baseUrl}color-gamut=' !default
-$color-index: '#{$baseUrl}color-index=' !default
-$forced-colors: '#{$baseUrl}forced-colors=' !default
-$inverted-colors: '#{$baseUrl}inverted-colors=' !default
+$color: '#{$base-url}color=' !default
+$color-gamut: '#{$base-url}color-gamut=' !default
+$color-index: '#{$base-url}color-index=' !default
+$forced-colors: '#{$base-url}forced-colors=' !default
+$inverted-colors: '#{$base-url}inverted-colors=' !default
 
-$grid: '#{$baseUrl}grid=' !default
-$scan: '#{$baseUrl}scan=' !default
-$display-mode: '#{$baseUrl}display-mode=' !default
-$overflow-block: '#{$baseUrl}overflow-block=' !default
-$overflow-inline: '#{$baseUrl}overflow-inline=' !default
-$update: '#{$baseUrl}update=' !default
+$grid: '#{$base-url}grid=' !default
+$scan: '#{$base-url}scan=' !default
+$display-mode: '#{$base-url}display-mode=' !default
+$overflow-block: '#{$base-url}overflow-block=' !default
+$overflow-inline: '#{$base-url}overflow-inline=' !default
+$update: '#{$base-url}update=' !default
 
-$theme: '#{$baseUrl}theme=' !default
-$scripting: '#{$baseUrl}scripting=' !default
-$contrast: '#{$baseUrl}contrast=' !default
-$motion: '#{$baseUrl}motion=' !default
-$transparency: '#{$baseUrl}transparency=' !default
+$theme: '#{$base-url}theme=' !default
+$scripting: '#{$base-url}scripting=' !default
+$contrast: '#{$base-url}contrast=' !default
+$motion: '#{$base-url}motion=' !default
+$transparency: '#{$base-url}transparency=' !default
 
-$family: '#{$baseUrl}family=' !default
-$os: '#{$baseUrl}os=' !default
+$family: '#{$base-url}family=' !default
+$os: '#{$base-url}os=' !default
 
 
 @mixin hide
@@ -48,7 +48,6 @@ $os: '#{$baseUrl}os=' !default
     overflow: hidden !important
     position: fixed !important
     visibility: none !important
-
 
 
 
