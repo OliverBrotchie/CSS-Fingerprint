@@ -5,12 +5,12 @@ import { pathToRegexp } from "https://raw.githubusercontent.com/pillarjs/path-to
 import { ConnectionHandler } from "../../../index.ts";
 import { defaultFonts } from "./default-font-list.ts";
 
-const handler = new ConnectionHandler((x, y, z) => {
+const handler = new ConnectionHandler((fingerprint, ip, timestamp) => {
     // Get the correct fonts
-    x?.calculateFonts(defaultFonts);
+    fingerprint?.calculateFonts(defaultFonts);
 
-    console.log("Time stamp: " + z);
-    console.log(x);
+    console.log("Time stamp: " + timestamp);
+    console.log(fingerprint);
 });
 
 const cssRegex = pathToRegexp("/some/url/\\?:key=:value");
@@ -42,37 +42,36 @@ console.log(`🚀 Server is running on http://localhost:${PORT}`);
 for await (const req of server) {
     const connection = req.conn.remoteAddr as Deno.NetAddr;
 
-    // Handle the css requests first as they will be the greatest number of requests
-    const match = cssRegex.exec(req.url);
-    if (match) {
-        handler.insert(
-            `${connection.hostname}`,
-            match[1],
-            match[2],
-            req.headers
-        );
-
-        try {
+    try {
+        // Handle the css requests first as they will be the greatest number of requests
+        const match = cssRegex.exec(req.url);
+        if (match) {
+            handler.insert(
+                `${connection.hostname}`,
+                match[1],
+                match[2],
+                req.headers
+            );
             req.respond({ status: 200 });
-        } catch (e) {}
-    } else {
-        // Handle file requests and errors
-        if (req.url == "/") {
-            console.log("Connection from: " + connection.hostname);
-            serveFile(req, `./index.html`);
-        } else if (
-            !req.url.includes("..") &&
-            req.url.substr(0, 7) == "/files/" &&
-            existsSync(`./${req.url}`)
-        ) {
-            serveFile(req, `./${req.url}`);
-        } else
-            try {
+        } else {
+            // Handle file requests and errors
+            if (req.url == "/") {
+                console.log("Connection from: " + connection.hostname);
+                serveFile(req, `./index.html`);
+            } else if (
+                !req.url.includes("..") &&
+                req.url.substr(0, 7) == "/files/" &&
+                existsSync(`./${req.url}`)
+            ) {
+                serveFile(req, `./${req.url}`);
+            } else
                 req.respond({
                     body: "This content does not exist!",
                     status: 404,
                 });
-            } catch (e) {}
+        }
+    } catch (e) {
+        console.log(e);
     }
 }
 
@@ -96,13 +95,11 @@ async function serveFile(req: ServerRequest, filePath: string) {
         file.close();
     });
 
-    try {
-        req.respond({
-            status: 200,
-            body: file,
-            headers,
-        });
-    } catch (e) {}
+    req.respond({
+        status: 200,
+        body: file,
+        headers,
+    });
 }
 
 /** Returns the content-type based on the extension of a path. */
