@@ -1,5 +1,5 @@
-# css-fingerprinter
+# CSS Fingerprint
 
-CSS fingerprinting, no javascript required!
+CSS based fingerprinting
 
 https://oliverbrotchie.github.io/CSS-Fingerprinting/
