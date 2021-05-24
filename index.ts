@@ -31,6 +31,14 @@ export class Fingerprint {
             })
         );
     }
+
+    toJSON(): string {
+        return JSON.stringify({
+            properties: [...(this?.properties ?? [])],
+            fonts: [...(this?.fonts ?? [])],
+            headers: [...(this?.headers ?? [])],
+        });
+    }
 }
 
 /**
