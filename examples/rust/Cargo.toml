@@ -1,0 +1,20 @@
+[package]
+name = "rust-css-fingerprint-example"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true
+panic = "abort"
+
+[dependencies]
+tokio = { version= "1.12.0", features = ["time"] }
+actix-web = "4.0.0-beta.9"
+random-string = "1.0"
+chrono = "0.4"
+tokio-postgres = {version = "0.7.3", features = ["with-serde_json-1"] }
+dotenv_codegen = "0.15.0"
+serde = "1.0.117"
+serde_json = "1.0.59"

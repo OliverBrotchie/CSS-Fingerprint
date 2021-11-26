@@ -1,5 +1,5 @@
-fingerprint.css
-fingerprint.css.map
+*.css
+*.css.map
 .vscode/
 .DS_Store/
-
+*/node_modules/

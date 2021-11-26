@@ -1,0 +1,9 @@
+*.css
+*.css.map
+*.DS_Store
+fonts.ts
+
+# Added by cargo
+
+/target
+*.env

@@ -1,6 +1,9 @@
-@import '../../../../../fingerprint.sass' 
-$print: true
-    
+@import './fingerprint.sass'
+
+// CSS Cookie
+body
+    background-image: url("http://127.0.0.1:8000/some/url/308")
+
 #width
     @include width
 
@@ -15,28 +18,25 @@ $print: true
 
 #touchscreen
     @include touchscreen
-    
+
 #theme
     @include theme
-    
+
 #scripting
     @include scripting
-    
+
 #family
     @include family
 
 #os
     @include os
 
-#fonts
-    @include fonts
-
 #color
     @include color
 
 #color-gamut
     @include color-gamut
-    
+
 #color-index
     @include color-index
 
@@ -69,3 +69,6 @@ $print: true
 
 #transparency
     @include transparency
+
+#fonts
+    @include fonts
