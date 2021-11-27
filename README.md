@@ -6,7 +6,7 @@
 
 <br/>
 
-**An experimental method for CSS-based fingerprinting.**
+**An experimental method for CSS based fingerprinting and a pure CSS 'supercookie'.**
 
 ### Links:
 
@@ -18,6 +18,7 @@
 - [Contents](#contents)
 - [What is it?](#what-is-it)
 - [How does it work?](#how-does-it-work)
+- [CSS Cookie](#css-cookie)
 - [Why is this important?](#why-is-this-important)
 - [Examples](#examples)
 - [Calculating Device Uniqueness](#calculating-device-uniqueness)
@@ -32,7 +33,7 @@
 ## What is it?
 
 CSS Fingerprinting is a technique of tracking and gathering information on site visitors. 
-This method exploits the nature of CSS to track various characteristics about the visitor's 
+This method exploits the nature of CSS to collect various characteristics about the visitor's 
 browser and device, which can later be used to either identify or track said visitor.
 
 ## How does it work?
@@ -87,10 +88,13 @@ However, this works a little differently; every font not installed on device wil
 request. By comparing the differences between the requests and the full list of fonts, we can
 conclude what fonts are installed.
 
-We can also track visitors **cross-origin** by requesting an endpoint on the server 
+## CSS Cookie
+
+We can also track visitors cross-origin by requesting an endpoint on the server 
 that will return a permanent redirect (HTTP status 308) to a unique address. The browser will
 then permanently make requests to the previously generated unique address whenever the endpoint 
-is requested.
+is requested. This creates a pure CSS cookie that is reminisent of the '[supercookie](https://supercookie.me/)' exploit. This cookie is stored for an unlimited amount of time; the only way to remove it
+is to fully clear the browser's cache.
 
 <img src="/img/diagram.png" title="Diagram of 308 redirect" width="500" height="400" />
                     
@@ -112,7 +116,7 @@ number of requests per user by allowing the use of custom variables in URLs.
   --theme-preference: 'none';
   
   // Only make one request
-  background-image: url("/some/url/?" + var(--unique-identifier) + "&" + var(--width) + "&" + var(--height));
+  background-image: url("/some/url/?" + var(--unique-identifier) + "&" + var(--pointer) + "&" + var(--theme-preference));
 }
 
 // Detect pointer type and theme
@@ -148,12 +152,12 @@ To see a complete example (HTML/CSS/Server) check  out the [study repository](ht
 
 ## Calculating Device Uniqueness
 
-Entropy is used to quantify how identifiable fingerprint is. Let H be the entropy, X a discrete 
+Shannon Entropy is used to quantify how identifiable fingerprint is. Let H be the entropy, X a discrete 
 random variable with possible values `{x1,..., xn }` and `P(X)` a probability mass function. 
 
-The entropy follows the following formula:
+Shannon Entropy takes the following formula:
 
-<img src="https://render.githubusercontent.com/render/math?math=H(x) = \sum_{i}{P(x_i)log_bP(x_i)}" />
+<img src="https://render.githubusercontent.com/render/math?math=H(x) = -\sum_{i}{P(x_i)log_bP(x_i)}" />
 
 The entropy of Shannon is in bits where b = 2. One bit of entropy reduces by half the probability 
 of an event occurring.
