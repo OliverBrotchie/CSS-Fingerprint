@@ -25,6 +25,7 @@
   - [Example](#example)
 - [Improvements and Further Research](#improvements-and-further-research)
   - [NoScript Detection](#noscript-detection)
+  - [Attribute Profiling](#attribute-profiling)
   - [Async Loading and JS Interaction](#async-loading-and-js-interaction)
   - [OS and Browser Detection](#os-and-browser-detection)
 - [Contributing](#contributing)
@@ -221,6 +222,22 @@ these attempts could be thwarted by applying styles that will only be rendered i
 
 ```
 
+### Attribute Profiling
+
+Currently the `fingerprinting.sass` example will test all values between one and an arbitrary limit.
+This method is highly inefficient and a little inaccurate.
+
+**For example:** CSS pixels in actuality are split into fractions when resolved by the browser and hence two devices
+with similar, but non-identical dimensions will be counted as the same.
+
+Not only does this method cause inaccuracy but it also is inefficient.
+Most devices can be grouped into categories of similar dimensions.
+In the case of phones and tablets the differences between their dimensions will be extremely small and a higher
+accuracy is needed to identify the differences. However, there large gaps in size between the different groups (for example between Tablet and Desktop resolutions), which means there is little need for accurate testing between those ranges.
+
+**Further Research:** 
+Determine the optimal precision parameters for both intra and inter group testing.
+
 ### Async Loading and JS Interaction
 
 Through the use of Javascript, we can do several things to improve the accuracy and 
@@ -235,7 +252,7 @@ If a fingerprint can be uniquely identified by a subset of shards, there is no n
 with the overhead of loading the full set.
 
 **Further Research:**
-Develop Standardised sharding and conditional execution practices to improve performance and reduce 
+Develop standardised sharding and conditional execution practices to improve performance and reduce 
 server load.
 
 ### OS and Browser Detection
