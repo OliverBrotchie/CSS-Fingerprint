@@ -268,6 +268,10 @@ as font-detection is the most costly part of the process.
 Determine a standardized subset to test for. This set should test for the key differences between
 the defualts of different operating systems.
 
+### XSS Attacks
+
+If user generated CSS is displayed on websites it may give attackers the ability to track other visitors.
+
 ## Contributing
 
 If you have any problems, changes or additions, please just open an issue or pull request!
