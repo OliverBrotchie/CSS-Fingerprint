@@ -12,7 +12,7 @@ and NodeJS.
 ## Enviroment Setup
 
 - Make sure the prerequisite runtime is installed (Cargo, Deno, Node).
-- (Node Spesific) Run `npm install` before use.
+- (Node Specific) Run `npm install` before use.
 - Create a .env file with the following fields:
 
 **Deno**
@@ -31,11 +31,11 @@ port=port # The port that postgres is listening on
 DATABASE_URL=postgres://username:password@hostname/database
 ```
 
-## Spesific Implementations
+## Specific Implementations
 
 ### Node
 
-A Javascript implementation of a Fingerprinting server built using Express.js.
+A JavaScript implementation of a Fingerprinting server built using Express.js.
 
 ### Deno
 
