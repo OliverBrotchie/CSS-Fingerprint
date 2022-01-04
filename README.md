@@ -28,6 +28,7 @@
   - [Attribute Profiling](#attribute-profiling)
   - [Async Loading and JS Interaction](#async-loading-and-js-interaction)
   - [OS and Browser Detection](#os-and-browser-detection)
+  - [XSS Attacks](#xss-attacks)
 - [Contributing](#contributing)
 - [License](#license)
 
